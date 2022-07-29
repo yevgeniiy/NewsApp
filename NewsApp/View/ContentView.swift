@@ -6,37 +6,34 @@
 //
 
 import SwiftUI
-import WebKit
 
 struct ContentView: View {
     
     @ObservedObject private var vm = ViewModel()
+    
     @State private var searchText: String = ""
     
     var body: some View {
+        
         NavigationView {
-                List {
-                    ForEach(vm.articles, id: \.id) { article in
-                        CellView(article: article)
-                    }
-                
+            List {
+                ForEach(vm.articles, id: \.id) { article in
+                    CellView(article: article)
+                }
             }
-                .listStyle(.inset)
-                .onAppear(perform: vm.fetchAllArticles)
+            .listStyle(.inset)
             .navigationTitle("News")
             .searchable(text: $searchText)
             .onSubmit(of: .search) {
-                vm.searchArticles(from: searchText)
+                Task { await vm.searchArticles(from: searchText) }
             }
             .refreshable {
-                vm.fetchAllArticles()
+                Task { await vm.fetchAllArticles() }
             }
-            .alert(vm.error ?? "Unknown error", isPresented: $vm.hasError) {
-                Button("Ok", role: .cancel) {}
-                }
-            
+            .task {
+                await vm.fetchAllArticles()
+            }
         }
-
     }
 }
 
