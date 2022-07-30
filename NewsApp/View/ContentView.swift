@@ -33,6 +33,10 @@ struct ContentView: View {
             .task {
                 await vm.fetchAllArticles()
             }
+            .alert(vm.errorMessage, isPresented: $vm.showErrorAlert) {
+                Button("Ok", role: .cancel) {}
+            }
+            
         }
     }
 }

@@ -10,25 +10,29 @@ import Foundation
 
 class ViewModel: ObservableObject {
     
-    @Published var articles: [Articles] = []
+    let newsAPI = NewsAPI()
     
-    let service = NewsAPI()
+    @Published var articles: [Articles] = []
+    @Published var showErrorAlert: Bool = false
+    @Published var errorMessage: String = ""
     
     @MainActor
     func fetchAllArticles() async {
+        refreshState()
         do {
-            self.articles = try await service.fetch(url: buildNewsURL(searchText: nil))
+            self.articles = try await newsAPI.fetch(url: buildNewsURL(searchText: nil))
         } catch {
-            print(error)
+            showError(error: error)
         }
     }
     
     @MainActor
     func searchArticles(from searchText: String) async {
+        refreshState()
         do {
-            self.articles = try await service.fetch(url: buildNewsURL(searchText: searchText))
+            self.articles = try await newsAPI.fetch(url: buildNewsURL(searchText: searchText))
         } catch {
-            print(error)
+            showError(error: error)
         }
     }
     
@@ -43,6 +47,17 @@ class ViewModel: ObservableObject {
         }
         
         return URL(string: url)!
+    }
+    
+    private func showError(error: Error) {
+        self.showErrorAlert = true
+        self.errorMessage = error.localizedDescription
+        
+    }
+    
+    private func refreshState() {
+        self.showErrorAlert = false
+        self.errorMessage = ""
     }
     
 }

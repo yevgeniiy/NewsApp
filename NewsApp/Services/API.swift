@@ -12,9 +12,21 @@ struct NewsAPI {
     func fetch(url:URL) async throws -> [Articles] {
         
         let session = URLSession.shared
-        let (data, _) = try await session.data(from: url)
+        let (data, response) = try await session.data(from: url)
+        
+        guard response is HTTPURLResponse else {
+            throw APIErrors.badResponse
+        }
+        
         let apiResponse = try JSONDecoder().decode(NewsApiResponse.self, from: data)
-        return apiResponse.articles ?? []
+        
+        if apiResponse.status == "ok" {
+            return apiResponse.articles ?? []
+        } else if apiResponse.status == "error" {
+            throw NSError(domain: "NewsAPI", code: 1, userInfo: [NSLocalizedDescriptionKey: apiResponse.message ?? "Unknown error."])
+        } else {
+            throw APIErrors.unknownError
+        }
         
     }
     
