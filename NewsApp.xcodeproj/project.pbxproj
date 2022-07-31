@@ -15,6 +15,11 @@
 		D75C97AF289329BA0062EC45 /* ArticleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75C97AE289329BA0062EC45 /* ArticleData.swift */; };
 		D75C97B1289338E60062EC45 /* NewsApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75C97B0289338E60062EC45 /* NewsApiResponse.swift */; };
 		D75C97B5289351EF0062EC45 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75C97B4289351EF0062EC45 /* CellView.swift */; };
+		D7AF17372895F23200F301A6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = D7AF17362895F23200F301A6 /* Lottie */; };
+		D7AF17392895F43100F301A6 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AF17382895F43100F301A6 /* LottieView.swift */; };
+		D7AF173E2895F9F400F301A6 /* SplachScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AF173D2895F9F400F301A6 /* SplachScreenView.swift */; };
+		D7AF17402895FB8800F301A6 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AF173F2895FB8800F301A6 /* NewsView.swift */; };
+		D7AF17452896ECBD00F301A6 /* app_loading.json in Resources */ = {isa = PBXBuildFile; fileRef = D7AF17442896ECBC00F301A6 /* app_loading.json */; };
 		D7ECFB5C2893644900ECE65A /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ECFB5B2893644900ECE65A /* WebView.swift */; };
 		D7ECFB6928945D1500ECE65A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ECFB6828945D1500ECE65A /* API.swift */; };
 		D7ECFB6C28945D4900ECE65A /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ECFB6B28945D4900ECE65A /* APIConstants.swift */; };
@@ -31,6 +36,10 @@
 		D75C97AE289329BA0062EC45 /* ArticleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleData.swift; sourceTree = "<group>"; };
 		D75C97B0289338E60062EC45 /* NewsApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsApiResponse.swift; sourceTree = "<group>"; };
 		D75C97B4289351EF0062EC45 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
+		D7AF17382895F43100F301A6 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		D7AF173D2895F9F400F301A6 /* SplachScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplachScreenView.swift; sourceTree = "<group>"; };
+		D7AF173F2895FB8800F301A6 /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
+		D7AF17442896ECBC00F301A6 /* app_loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = app_loading.json; sourceTree = "<group>"; };
 		D7ECFB5B2893644900ECE65A /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		D7ECFB6828945D1500ECE65A /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		D7ECFB6B28945D4900ECE65A /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
@@ -42,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7AF17372895F23200F301A6 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,11 +78,12 @@
 			isa = PBXGroup;
 			children = (
 				D75C979E289323350062EC45 /* NewsAppApp.swift */,
+				D7AF173C2895F72900F301A6 /* Resources */,
 				D7ECFB6D28945D8C00ECE65A /* Services */,
 				D7ECFB6A28945D2A00ECE65A /* Constants */,
-				D7ECFB5D2893E0BB00ECE65A /* View */,
-				D7ECFB5E2893E0EC00ECE65A /* ViewModel */,
-				D7ECFB5F2893E0FF00ECE65A /* Model */,
+				D75C97A0289323350062EC45 /* ContentView.swift */,
+				D7AF1746289721FC00F301A6 /* SplachScreen */,
+				D7AF17412896E86000F301A6 /* News */,
 				D75C97A2289323360062EC45 /* Assets.xcassets */,
 				D75C97A4289323360062EC45 /* Preview Content */,
 			);
@@ -87,12 +98,56 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		D7ECFB5D2893E0BB00ECE65A /* View */ = {
+		D7AF173C2895F72900F301A6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D7AF17442896ECBC00F301A6 /* app_loading.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D7AF17412896E86000F301A6 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				D7AF17422896E8AA00F301A6 /* View */,
+				D7ECFB5E2893E0EC00ECE65A /* ViewModel */,
+				D7ECFB5F2893E0FF00ECE65A /* Model */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		D7AF17422896E8AA00F301A6 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				D7ECFB5B2893644900ECE65A /* WebView.swift */,
-				D75C97A0289323350062EC45 /* ContentView.swift */,
 				D75C97B4289351EF0062EC45 /* CellView.swift */,
+				D7AF173F2895FB8800F301A6 /* NewsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D7AF17432896E8D000F301A6 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				D7ECFB6828945D1500ECE65A /* API.swift */,
+				D7ECFB6E289579C700ECE65A /* APIErrors.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		D7AF1746289721FC00F301A6 /* SplachScreen */ = {
+			isa = PBXGroup;
+			children = (
+				D7ECFB5D2893E0BB00ECE65A /* View */,
+			);
+			path = SplachScreen;
+			sourceTree = "<group>";
+		};
+		D7ECFB5D2893E0BB00ECE65A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D7AF17382895F43100F301A6 /* LottieView.swift */,
+				D7AF173D2895F9F400F301A6 /* SplachScreenView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -125,8 +180,7 @@
 		D7ECFB6D28945D8C00ECE65A /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				D7ECFB6828945D1500ECE65A /* API.swift */,
-				D7ECFB6E289579C700ECE65A /* APIErrors.swift */,
+				D7AF17432896E8D000F301A6 /* API */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -147,6 +201,9 @@
 			dependencies = (
 			);
 			name = NewsApp;
+			packageProductDependencies = (
+				D7AF17362895F23200F301A6 /* Lottie */,
+			);
 			productName = NewsApp;
 			productReference = D75C979B289323350062EC45 /* NewsApp.app */;
 			productType = "com.apple.product-type.application";
@@ -175,6 +232,9 @@
 				Base,
 			);
 			mainGroup = D75C9792289323350062EC45;
+			packageReferences = (
+				D7AF17352895F23200F301A6 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = D75C979C289323350062EC45 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -189,6 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7AF17452896ECBD00F301A6 /* app_loading.json in Resources */,
 				D75C97A6289323360062EC45 /* Preview Assets.xcassets in Resources */,
 				D75C97A3289323360062EC45 /* Assets.xcassets in Resources */,
 			);
@@ -202,14 +263,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				D75C97AF289329BA0062EC45 /* ArticleData.swift in Sources */,
+				D7AF173E2895F9F400F301A6 /* SplachScreenView.swift in Sources */,
 				D75C97B5289351EF0062EC45 /* CellView.swift in Sources */,
 				D75C97B1289338E60062EC45 /* NewsApiResponse.swift in Sources */,
 				D75C97A1289323350062EC45 /* ContentView.swift in Sources */,
 				D7ECFB6F289579C700ECE65A /* APIErrors.swift in Sources */,
 				D75C97AD289326C30062EC45 /* ViewModel.swift in Sources */,
+				D7AF17402895FB8800F301A6 /* NewsView.swift in Sources */,
 				D7ECFB6C28945D4900ECE65A /* APIConstants.swift in Sources */,
 				D75C979F289323350062EC45 /* NewsAppApp.swift in Sources */,
 				D7ECFB6928945D1500ECE65A /* API.swift in Sources */,
+				D7AF17392895F43100F301A6 /* LottieView.swift in Sources */,
 				D7ECFB5C2893644900ECE65A /* WebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -338,6 +402,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_ASSET_PATHS = "\"NewsApp/Preview Content\"";
 				DEVELOPMENT_TEAM = DLL64G6ZHA;
 				ENABLE_PREVIEWS = YES;
@@ -367,6 +432,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_ASSET_PATHS = "\"NewsApp/Preview Content\"";
 				DEVELOPMENT_TEAM = DLL64G6ZHA;
 				ENABLE_PREVIEWS = YES;
@@ -411,6 +477,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D7AF17352895F23200F301A6 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D7AF17362895F23200F301A6 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7AF17352895F23200F301A6 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D75C9793289323350062EC45 /* Project object */;
 }

@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 enum APIConstants {
     static let baseURL = "https://newsapi.org/v2/top-headlines?"
     static let apiKey = "API"
