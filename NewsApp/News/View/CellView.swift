@@ -15,6 +15,8 @@ struct CellView: View {
         NavigationLink(destination: WebView(url: URL(string: article.url)!)) {
             HStack {
                 asyncImage
+                    .frame(maxWidth: 100, maxHeight: 100)
+                    .cornerRadius(10)
                 VStack {
                     Text(article.title)
                         .font(.headline)
@@ -38,13 +40,10 @@ struct CellView: View {
                     if let image = phase.image {
                         image.resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(maxWidth: 100, maxHeight: 100)
-                            .cornerRadius(10)
                     } else if phase.error != nil {
                         noImageAvailable
                     } else {
                         ProgressView()
-                            .frame(maxWidth: 100, maxHeight: 100)
                     }
                 }
             } else {
@@ -57,8 +56,6 @@ struct CellView: View {
         Image("noimage")
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(maxWidth: 100, maxHeight: 100)
-            .cornerRadius(10)
     }
     
 }

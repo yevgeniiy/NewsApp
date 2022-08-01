@@ -13,8 +13,9 @@ class ViewModel: ObservableObject {
     let newsAPI = NewsAPI()
     
     @Published var articles: [Articles] = []
-    @Published var showErrorAlert: Bool = false
     @Published var errorMessage: String = ""
+    
+    @Published var showErrorAlert: Bool = false
     @Published var isLoading: Bool = true
     
     @MainActor
