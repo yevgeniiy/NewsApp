@@ -15,12 +15,14 @@ class ViewModel: ObservableObject {
     @Published var articles: [Articles] = []
     @Published var showErrorAlert: Bool = false
     @Published var errorMessage: String = ""
+    @Published var isLoading: Bool = true
     
     @MainActor
     func fetchAllArticles() async {
         refreshState()
         do {
             self.articles = try await newsAPI.fetch(url: buildNewsURL(searchText: nil))
+            self.isLoading = false
         } catch {
             showError(error: error)
         }
@@ -31,6 +33,7 @@ class ViewModel: ObservableObject {
         refreshState()
         do {
             self.articles = try await newsAPI.fetch(url: buildNewsURL(searchText: searchText))
+            self.isLoading = false
         } catch {
             showError(error: error)
         }
@@ -56,8 +59,10 @@ class ViewModel: ObservableObject {
     }
     
     private func refreshState() {
+        self.articles = []
         self.showErrorAlert = false
         self.errorMessage = ""
+        self.isLoading = true
     }
     
 }

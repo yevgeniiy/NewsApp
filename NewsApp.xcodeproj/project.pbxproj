@@ -78,13 +78,12 @@
 			isa = PBXGroup;
 			children = (
 				D75C979E289323350062EC45 /* NewsAppApp.swift */,
-				D7AF173C2895F72900F301A6 /* Resources */,
 				D7ECFB6D28945D8C00ECE65A /* Services */,
 				D7ECFB6A28945D2A00ECE65A /* Constants */,
 				D75C97A0289323350062EC45 /* ContentView.swift */,
 				D7AF1746289721FC00F301A6 /* SplachScreen */,
 				D7AF17412896E86000F301A6 /* News */,
-				D75C97A2289323360062EC45 /* Assets.xcassets */,
+				D7AF173C2895F72900F301A6 /* Resources */,
 				D75C97A4289323360062EC45 /* Preview Content */,
 			);
 			path = NewsApp;
@@ -102,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				D7AF17442896ECBC00F301A6 /* app_loading.json */,
+				D75C97A2289323360062EC45 /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
