@@ -9,8 +9,16 @@ import SwiftUI
 
 struct EmptyNewsView: View {
     var body: some View {
-        Text("No news to show")
-            .font(.headline)
+        VStack {
+            Image(systemName: "newspaper")
+                .resizable()
+                .frame(width: 100, height: 100)
+            Text("No news to show")
+                .font(.title2)
+                .fontWeight(.bold)
+                .padding(.top)
+        }
+        .foregroundColor(.gray.opacity(0.8))
     }
 }
 
