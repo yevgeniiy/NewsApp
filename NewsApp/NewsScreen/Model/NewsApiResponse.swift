@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 struct NewsApiResponse: Decodable {
     
     let status: String

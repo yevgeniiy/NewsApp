@@ -44,7 +44,7 @@ class ViewModel: ObservableObject {
     private func buildNewsURL(searchText: String?) -> URL {
         var url = APIConstants.baseURL
         url += "apiKey=\(APIConstants.apiKey)"
-        url += "&language=en"
+        url += "&language=\(UserSettings.newsLanguage.code)"
         if searchText != nil {
             let searchQuery = searchText!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
             url += "&q=\(searchQuery)"

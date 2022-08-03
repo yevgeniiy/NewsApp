@@ -24,7 +24,7 @@ struct NewsRowView: View {
                         .font(.headline)
                         .lineLimit(1)
                         .padding(.bottom, 1)
-                    Text(article.description!)
+                    Text(article.description ?? "")
                         .lineLimit(2)
                         .font(.subheadline)
                 }
