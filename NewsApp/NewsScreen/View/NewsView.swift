@@ -34,8 +34,8 @@ struct NewsView: View {
             .refreshable {
                 Task { await vm.fetchAllArticles() }
             }
-            .task {
-                await vm.fetchAllArticles()
+            .onAppear {
+                Task { await vm.fetchAllArticles() }
             }
             .alert(vm.errorMessage, isPresented: $vm.showErrorAlert) {
                 Button("Ok", role: .cancel) {}
