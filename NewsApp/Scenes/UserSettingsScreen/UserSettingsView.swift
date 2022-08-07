@@ -9,11 +9,7 @@ import SwiftUI
 
 struct UserSettingsView: View {
     
-    let defaults = UserDefaults.standard
-
     @State private var selectedNewsLanguage: NewsLanguage = UserSettings.newsLanguage
-    
-    @State private var selection = 0
     
     var body: some View {
         NavigationView {
@@ -23,21 +19,13 @@ struct UserSettingsView: View {
                         Text(value.description).tag(value)
                     }
                 }
-                
-
             }
-            
             .navigationBarTitle("Settings")
             .onChange(of: selectedNewsLanguage) { newValue in
                 UserSettings.newsLanguage = newValue
             }
-
         }
-        
-
     }
-    
-    
 }
 
 struct UserPreferencesView_Previews: PreviewProvider {

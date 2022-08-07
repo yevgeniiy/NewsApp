@@ -9,7 +9,7 @@ import Foundation
 
 struct NewsAPI {
     
-    func fetch(url:URL) async throws -> [Articles] {
+    func fetch(url:URL) async throws -> [ArticlesData] {
         
         let session = URLSession.shared
         let (data, response) = try await session.data(from: url)
@@ -29,7 +29,27 @@ struct NewsAPI {
         }
         
     }
+}
+
+extension NewsAPI {
     
+    func topHeadlines() async throws -> [ArticlesData] {
+        var urlString = APIConstants.topNewsURL
+        urlString += "apiKey=\(APIConstants.apiKey)"
+        urlString += "&language=\(UserSettings.newsLanguage.code)"
+        let url = URL(string: urlString)!
+        return try await self.fetch(url: url)
+    }
+    
+    func search(searchText: String) async throws -> [ArticlesData] {
+        let searchQuery = searchText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        var urlString = APIConstants.baseURL
+        urlString += "apiKey=\(APIConstants.apiKey)"
+        urlString += "&language=\(UserSettings.newsLanguage.code)"
+        urlString += "&q=\(searchQuery)"
+        let url = URL(string: urlString)!
+        return try await self.fetch(url: url)
+    }
     
 }
 

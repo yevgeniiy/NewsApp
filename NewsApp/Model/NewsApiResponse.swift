@@ -10,7 +10,7 @@ import Foundation
 struct NewsApiResponse: Decodable {
     
     let status: String
-    let articles: [Articles]?
+    let articles: [ArticlesData]?
     
     let code: String?
     let message: String?
