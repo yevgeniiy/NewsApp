@@ -40,10 +40,12 @@ struct NewsRowView: View {
         .padding(5)
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             Button {
-                do {
-                    try article.addToFavorite()
-                } catch {
-                    errorHandling.handle(error: error)
+                Task {
+                    do {
+                        try await article.addToFavorite()
+                    } catch {
+                        errorHandling.handle(error: error)
+                    }
                 }
             } label: {
                 Label("Favorite", systemImage: "bookmark")

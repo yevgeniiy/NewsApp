@@ -6,16 +6,17 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct ArticlesData: Decodable, Identifiable {
-
+    
     let id = UUID()
     let title: String
     let description: String?
     let url: String
     let urlToImage: String?
     
-    func addToFavorite() throws {
+    func addToFavorite() async throws {
         let viewContext = PersistenceController.shared.container.viewContext
         let entity = ArticlesDB(context: viewContext)
         entity.articleTitle = self.title
@@ -23,6 +24,15 @@ struct ArticlesData: Decodable, Identifiable {
         entity.urlToImage = self.urlToImage
         entity.url = self.url
         entity.additionDate = Date()
+        
+        if let urlString = self.urlToImage {
+            let url = URL(string: urlString)!
+            let (data, response) = try await URLSession.shared.data(from: url)
+            
+            if response is HTTPURLResponse {
+                entity.savedImage = data
+            }
+        }
         try viewContext.save()
     }
     

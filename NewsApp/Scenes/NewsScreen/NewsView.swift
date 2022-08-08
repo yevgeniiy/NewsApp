@@ -24,6 +24,10 @@ struct NewsView: View {
         }
     }
     
+    init() {
+        updateView()
+    }
+    
     var body: some View {
         NavigationView {
             NewsListView(articles: articles)
@@ -47,12 +51,13 @@ struct NewsView: View {
                     }
                 }
                 .refreshable {
-                    updateView()
+                        updateView()
                 }
                 .onAppear {
-                    updateView()
+                    if searchText.isEmpty {
+                        updateView()
+                    }
                 }
-            
         }
     }
 }
@@ -78,6 +83,7 @@ extension NewsView {
     }
     
     private func updateView() {
+        self.articles.removeAll()
         self.isLoading = true
         Task {
             do {

@@ -21,11 +21,12 @@ struct FavoritesRowView: View {
             self.showWebView = true
         } label: {
             HStack {
-                asyncImage
+                newsImage
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 70, height: 70)
                     .cornerRadius(10)
                     .clipped()
+                
                 VStack {
                     Text(article.articleTitle ?? "")
                         .font(.headline)
@@ -75,9 +76,11 @@ struct FavoritesRowView_Previews: PreviewProvider {
 
 extension FavoritesRowView {
     
-    private var asyncImage: some View  {
+    private var newsImage: some View  {
         Group {
-            if let url = article.urlToImage, !url.isEmpty {
+            if let newsImage = article.savedImage {
+                Image(uiImage: UIImage(data: newsImage)!).resizable()
+            } else if let url = article.urlToImage {
                 AsyncImage(url: URL(string: url)) { phase in
                     if let image = phase.image {
                         image.resizable()

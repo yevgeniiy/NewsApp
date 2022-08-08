@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 
 extension ArticlesDB {
@@ -22,6 +23,7 @@ extension ArticlesDB {
     @NSManaged public var id: UUID?
     @NSManaged public var url: String?
     @NSManaged public var urlToImage: String?
+    @NSManaged public var savedImage: Data?
     
     static var viewContext: NSManagedObjectContext {
         return PersistenceController.shared.container.viewContext

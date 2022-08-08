@@ -5,11 +5,11 @@
         <attribute name="articleDescription" optional="YES" attributeType="String"/>
         <attribute name="articleTitle" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="savedImage" optional="YES" attributeType="Binary"/>
+        <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="url" optional="YES" attributeType="String"/>
         <attribute name="urlToImage" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="ArticlesDB" positionX="-63" positionY="-18" width="128" height="134"/>
+        <element name="ArticlesDB" positionX="-63" positionY="-18" width="128" height="148"/>
     </elements>
 </model>
