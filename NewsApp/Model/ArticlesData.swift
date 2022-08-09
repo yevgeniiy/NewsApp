@@ -37,5 +37,3 @@ struct ArticlesData: Decodable, Identifiable {
     }
     
 }
-
-

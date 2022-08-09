@@ -9,8 +9,6 @@ import SwiftUI
 
 struct NewsView: View {
     
-    private let newsAPI = NewsAPI()
-    
     @State private var articles: [ArticlesData] = []
     
     @State private var _searchText: String = ""
@@ -22,10 +20,6 @@ struct NewsView: View {
         get {
             return self._searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         }
-    }
-    
-    init() {
-        updateView()
     }
     
     var body: some View {
@@ -74,7 +68,7 @@ extension NewsView {
         self.isLoading = true
         Task {
             do {
-                self.articles = try await newsAPI.search(searchText: searchText)
+                self.articles = try await NewsAPI.shared.getData(from: .searchArticle(searchString: searchText)).articles ?? []
                 self.isLoading = false
             } catch {
                 errorHandling.handle(error: error)
@@ -87,7 +81,7 @@ extension NewsView {
         self.isLoading = true
         Task {
             do {
-                self.articles = try await newsAPI.topHeadlines()
+                self.articles = try await NewsAPI.shared.getData(from: .getTopHeadlines).articles ?? []
                 self.isLoading = false
             } catch {
                 errorHandling.handle(error: error)
