@@ -16,9 +16,7 @@ struct SourcesView: View {
     @State private var _searchText: String = ""
     @State private var isLoading: Bool = true
     
-    private var searchText: String {
-        get { return self._searchText.trimmingCharacters(in: .whitespacesAndNewlines) }
-    }
+    private var searchText: String { _searchText.trimmingCharacters(in: .whitespacesAndNewlines) }
     
     private var searchResults: [SourceResponse] {
         if searchText.isEmpty {

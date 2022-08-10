@@ -10,4 +10,5 @@ import Foundation
 enum APIConstants {
     static let baseURL = "https://newsapi.org/v2/"
     static let apiKey = "API"
+    static let pageSize = "20"
 }

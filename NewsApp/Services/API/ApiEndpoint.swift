@@ -8,10 +8,11 @@
 import Foundation
 
 enum ApiEndpoint {
-    case getTopHeadlines
+    case getTopHeadlines(page:String)
     case getSources
-    case searchArticle(searchString: String)
-    case getArticlesFromSource(source: String)
+    case searchArticle(searchString: String, page:String)
+    case getArticlesFromSource(source: String, page:String)
+    case searchArticleFromSource(searchString: String, source: String, page:String)
 }
 
 extension ApiEndpoint {
@@ -22,24 +23,28 @@ extension ApiEndpoint {
             return "top-headlines"
         case .getSources:
             return "top-headlines/sources"
-        case .searchArticle, .getArticlesFromSource:
+        case .searchArticle, .getArticlesFromSource, .searchArticleFromSource:
             return "everything"
         }
     }
     
     var parameters: [String: String] {
-        var dict = ["apiKey": APIConstants.apiKey, "language": UserSettings.newsLanguage.code]
+        var dict = ["apiKey": APIConstants.apiKey, "language": UserSettings.newsLanguage.code, "pageSize": APIConstants.pageSize]
         switch self {
-        case .getTopHeadlines:
-            return dict
-        case .getSources:
-            return dict
-        case .searchArticle(let searchString):
+        case .getTopHeadlines(let page):
+            dict["page"] = page
+        case .searchArticle(let searchString, let page):
             dict["q"] = searchString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        case .getArticlesFromSource(let source):
+            dict["page"] = page
+        case .getArticlesFromSource(let source, let page):
             dict["sources"] = source
+            dict["page"] = page
+        case .searchArticleFromSource(let searchString, let source, let page):
+            dict["sources"] = source
+            dict["q"] = searchString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            dict["page"] = page
+        default: return dict
         }
-        
         return dict
     }
 }

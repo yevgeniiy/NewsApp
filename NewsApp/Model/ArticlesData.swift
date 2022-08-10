@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct ArticlesData: Decodable, Identifiable {
+struct ArticlesData: Decodable, Identifiable, Equatable {
     
     let id = UUID()
     let title: String
