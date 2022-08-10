@@ -11,6 +11,7 @@ enum ApiEndpoint {
     case getTopHeadlines
     case getSources
     case searchArticle(searchString: String)
+    case getArticlesFromSource(source: String)
 }
 
 extension ApiEndpoint {
@@ -19,11 +20,9 @@ extension ApiEndpoint {
         switch self {
         case .getTopHeadlines:
             return "top-headlines"
-            
         case .getSources:
             return "top-headlines/sources"
-            
-        case .searchArticle:
+        case .searchArticle, .getArticlesFromSource:
             return "everything"
         }
     }
@@ -37,7 +36,10 @@ extension ApiEndpoint {
             return dict
         case .searchArticle(let searchString):
             dict["q"] = searchString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        case .getArticlesFromSource(let source):
+            dict["sources"] = source
         }
+        
         return dict
     }
 }
