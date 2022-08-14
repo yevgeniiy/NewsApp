@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct FavoritesView: View {
-
-    @EnvironmentObject var errorHandling: ErrorHandling
-
+    
     @State private var searchText: String = ""
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \ArticlesDB.additionDate, ascending: true)]) private var articles: FetchedResults<ArticlesDB>
@@ -18,11 +16,6 @@ struct FavoritesView: View {
     var body: some View {
         NavigationView {
             FavoritesListView(articles: articles)
-                .overlay {
-                    if articles.isEmpty {
-                        EmptyNewsView()
-                    }
-                }
                 .navigationTitle("Favorites")
                 .searchable(text: $searchText)
         }
@@ -41,8 +34,10 @@ struct FavoritesListView: View {
             ForEach(self.articles.reversed(), id: \.self) { article in
                 FavoritesRowView(article: article)
             }
+            if self.articles.isEmpty {
+                FavoritesEmptyView()
+            }
         }
-        .listStyle(.inset)
     }
 }
 

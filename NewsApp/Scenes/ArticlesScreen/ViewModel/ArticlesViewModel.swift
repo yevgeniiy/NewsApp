@@ -1,14 +1,16 @@
 //
-//  ArticlesSourceViewModel.swift
+//  NewsViewModel.swift
 //  NewsApp
 //
-//  Created by Yevgenii Kryzhanivskyi on 13.08.2022.
+//  Created by Yevgenii Kryzhanivskyi on 10.08.2022.
 //
 
 import Foundation
 
+
+
 @MainActor
-final class ArticlesSourceViewModel: ObservableObject {
+final class ArticlesViewModel: ObservableObject {
     
     @Published private(set) var articles:[ArticlesResponse] = []
     @Published private(set) var loadingState:LoadingState = .initial
@@ -16,8 +18,9 @@ final class ArticlesSourceViewModel: ObservableObject {
     let paginator = ArticlesDataPaginator()
     
     private func fetchData(from endpoint: ApiEndpoint) async {
-        loadingState = .initial
         do {
+            loadingState = .initial
+            self.articles.removeAll()
             let data = try await paginator.getFirstPage(from: endpoint)
             self.articles = data
             loadingState = .success
@@ -38,17 +41,17 @@ final class ArticlesSourceViewModel: ObservableObject {
         }
     }
     
-    func searchArticlesFromSource(source: SourceResponse, searchText: String) {
+    func searchArticle(searchText: String) {
         if searchText.isEmpty {
-            getArticlesFromSource(source: source)
+            getArticles()
         } else {
-            Task { await fetchData(from: .searchArticleFromSource(searchString: searchText, source: source.id)) }
+            Task { await fetchData(from: .searchArticle(searchString: searchText)) }
         }
     }
     
-    func getArticlesFromSource(source: SourceResponse) {
+    func getArticles() {
         Task {
-            await fetchData(from: .getArticlesFromSource(source: source.id))
+            await fetchData(from: .getTopHeadlines)
         }
     }
     
@@ -57,4 +60,8 @@ final class ArticlesSourceViewModel: ObservableObject {
             await fetchData(from: paginator.currentEndpoint)
         }
     }
+    
+
 }
+
+

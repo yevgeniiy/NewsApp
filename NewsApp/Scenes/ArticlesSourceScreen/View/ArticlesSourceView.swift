@@ -10,52 +10,48 @@ import SwiftUI
 struct ArticlesSourceView: View {
     
     @State var source: SourceResponse
-
-    @ObservedObject private var vm = ArticlesSourceViewModel()
+    
+    @StateObject var vm = ArticlesSourceViewModel()
     @State private var searchText: String = ""
     
     private var trimmedSearchText: String { searchText.trimmingCharacters(in: .whitespacesAndNewlines)}
     
-    @EnvironmentObject private var errorHandling: ErrorHandling
-    
     var body: some View {
+        ArticlesSourceList
+            .overlay {
+                if case .initial = vm.loadingState, vm.articles.isEmpty {
+                    ProgressView()
+                }
+            }
+            .navigationTitle(self.source.name)
+            .searchable(text: $searchText)
+            .onChange(of: trimmedSearchText) { newValue in
+                vm.searchArticlesFromSource(source: source, searchText: trimmedSearchText)
+            }
+            .refreshable {
+                vm.refreshArticles()
+            }
+            .onAppear {
+                vm.getArticlesFromSource(source: source)
+            }
+        
+    }
+    
+    var ArticlesSourceList: some View {
         List {
             ForEach(vm.articles, id: \.id) { article in
-                NewsRowView(article: article)
+                ArticlesRowView(article: article)
                     .onAppear {
                         if article == vm.articles.last {
-                            vm.loadMore(source: self.source, searchText: self.trimmedSearchText)
+                            Task { await vm.loadMore() }
                         }
                     }
             }
-        }
-        .listStyle(.inset)
-        .overlay {
-            if case .loading = vm.loadingState {
-                ProgressView()
-            } else if vm.articles.isEmpty {
-                EmptyNewsView()
+            if case .success = vm.loadingState, vm.articles.isEmpty {
+                ArticlesEmptyView()
             }
         }
-        .navigationTitle(self.source.name)
-        .searchable(text: $searchText)
-        .onSubmit(of: .search) {
-            vm.searchArticle(searchText: trimmedSearchText, source: self.source, page: 1)
-        }
-        .onChange(of: trimmedSearchText) { newValue in
-            if newValue.isEmpty {
-                vm.updateView(source: self.source)
-            } else {
-                vm.articles.removeAll()
-                vm.searchArticle(searchText: newValue, source: self.source, page: 1)
-            }
-        }
-        .refreshable {
-            vm.updateView(source: self.source)
-        }
-        .onAppear {
-            vm.updateView(source: self.source)
-        }
+        .buttonStyle(.plain)
         
     }
 }

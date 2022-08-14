@@ -8,13 +8,20 @@
 import Foundation
 import SwiftUI
 
-struct ArticlesData: Decodable, Identifiable, Equatable {
+struct ArticlesResponse: Decodable, Identifiable, Equatable {
     
     let id = UUID()
     let title: String
     let description: String?
     let url: String
     let urlToImage: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case title
+        case description
+        case url
+        case urlToImage
+    }
     
     func addToFavorite() async throws {
         let viewContext = PersistenceController.shared.container.viewContext

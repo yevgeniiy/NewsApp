@@ -11,8 +11,6 @@ struct SourcesView: View {
     
     @State private var sources: [SourceResponse] = []
     
-    @EnvironmentObject private var errorHandling: ErrorHandling
-    
     @State private var _searchText: String = ""
     @State private var isLoading: Bool = true
     
@@ -28,17 +26,13 @@ struct SourcesView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                if !sources.isEmpty {
-                    ForEach(searchResults) { source in
-                        NavigationLink(source.name) {
-                            ArticlesSourceView(source: source)
-                        }
+                List(searchResults) { source in
+                    NavigationLink(source.name) {
+                        ArticlesSourceView(source: source)
                     }
                 }
-            }
-            .navigationTitle("Sources")
-            .searchable(text: $_searchText)
+                .navigationTitle("Sources")
+                .searchable(text: $_searchText)
         }
         .onAppear {
             updateView()
@@ -61,10 +55,10 @@ extension SourcesView {
         self.isLoading = true
         Task {
             do {
-                try await self.sources = NewsAPI.shared.getData(from: .getSources).sources ?? []
+                try await self.sources = NewsAPI.shared.getData(from: .getSources, page: nil).sources ?? []
                 self.isLoading = false
             } catch {
-                errorHandling.handle(error: error)
+                await ErrorHandling.shared.handle(error: error)
             }
         }
     }

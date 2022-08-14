@@ -9,7 +9,7 @@ import Foundation
 
 class PreviewData {
     
-    static func loadJson(fileName: String) -> [ArticlesData] {
+    static func loadJson(fileName: String) -> [ArticlesResponse] {
         if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path))

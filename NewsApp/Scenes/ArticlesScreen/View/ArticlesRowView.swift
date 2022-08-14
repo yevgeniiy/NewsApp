@@ -7,13 +7,11 @@
 
 import SwiftUI
 
-struct NewsRowView: View {
+struct ArticlesRowView: View {
     
-    let article: ArticlesData
+    let article: ArticlesResponse
     
     @State private var showWebView: Bool = false
-    
-    @EnvironmentObject private var errorHandling: ErrorHandling
     
     var body: some View {
         Button {
@@ -44,11 +42,11 @@ struct NewsRowView: View {
                     do {
                         try await article.addToFavorite()
                     } catch {
-                        errorHandling.handle(error: error)
+                        ErrorHandling.shared.handle(error: error)
                     }
                 }
             } label: {
-                Label("Favorite", systemImage: "bookmark")
+                Label("Favorite", systemImage: "heart")
             }.tint(.green)
         }
         .sheet(isPresented: $showWebView) {
@@ -59,13 +57,13 @@ struct NewsRowView: View {
 
 
 
-struct SwiftUIView_Previews: PreviewProvider {
+struct NewsRowView_Previews: PreviewProvider {
     static var previews: some View {
-        NewsRowView(article: ArticlesData(title: "Tory leadership latest: Sunak says yes to return of grammar schools - BBC", description: "But his team later clarifies Mr Sunak was only backing the expansion of existing grammar schools.", url: "https://www.bbc.co.uk/news/uk-62340247", urlToImage: "n"))
+        ArticlesRowView(article: ArticlesResponse(title: "Tory leadership latest: Sunak says yes to return of grammar schools - BBC", description: "But his team later clarifies Mr Sunak was only backing the expansion of existing grammar schools.", url: "https://www.bbc.co.uk/news/uk-62340247", urlToImage: "n"))
     }
 }
 
-extension NewsRowView {
+extension ArticlesRowView {
     
     private var asyncImage: some View  {
         Group {

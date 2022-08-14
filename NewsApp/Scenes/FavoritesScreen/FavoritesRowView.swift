@@ -13,8 +13,6 @@ struct FavoritesRowView: View {
     
     @State private var showWebView: Bool = false
     
-    @EnvironmentObject var errorHandling: ErrorHandling
-    
     var body: some View {
         
         Button {
@@ -47,7 +45,7 @@ struct FavoritesRowView: View {
                     do {
                         try article.delete()
                     } catch {
-                        errorHandling.handle(error: error)
+                        ErrorHandling.shared.handle(error: error)
                     }
                     
                 }

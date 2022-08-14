@@ -8,11 +8,11 @@
 import Foundation
 
 enum ApiEndpoint {
-    case getTopHeadlines(page:String)
+    case getTopHeadlines
     case getSources
-    case searchArticle(searchString: String, page:String)
-    case getArticlesFromSource(source: String, page:String)
-    case searchArticleFromSource(searchString: String, source: String, page:String)
+    case searchArticle(searchString: String)
+    case getArticlesFromSource(source: String)
+    case searchArticleFromSource(searchString: String, source: String)
 }
 
 extension ApiEndpoint {
@@ -28,23 +28,21 @@ extension ApiEndpoint {
         }
     }
     
+    var defaults: [String: String] {
+        return ["apiKey": APIConstants.apiKey,
+                "language": UserSettings.newsLanguage.code]
+    }
+    
     var parameters: [String: String] {
-        var dict = ["apiKey": APIConstants.apiKey, "language": UserSettings.newsLanguage.code, "pageSize": APIConstants.pageSize]
         switch self {
-        case .getTopHeadlines(let page):
-            dict["page"] = page
-        case .searchArticle(let searchString, let page):
-            dict["q"] = searchString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-            dict["page"] = page
-        case .getArticlesFromSource(let source, let page):
-            dict["sources"] = source
-            dict["page"] = page
-        case .searchArticleFromSource(let searchString, let source, let page):
-            dict["sources"] = source
-            dict["q"] = searchString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-            dict["page"] = page
-        default: return dict
+        case .searchArticle(let searchString):
+            return ["q": searchString]
+        case .getArticlesFromSource(let source):
+            return ["sources": source]
+        case .searchArticleFromSource(let searchString, let source):
+            return ["sources": source,
+                    "q": searchString]
+        default: return [:]
         }
-        return dict
     }
 }
