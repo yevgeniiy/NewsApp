@@ -3,6 +3,17 @@
 
 iOS client for [NewsAPI.org](https://newsapi.org) based on Swift.
 
+## Features
+
+- Loading screen with animation.
+- Fetch top news.
+- Infinite scrolling.
+- Change news language. The selected language will be saved when you reload the application.
+- Saving news to bookmarks. The selected news will be saved when you reload the application.
+- Read article in a Webview in sheet presentation.
+- Search news from all source or from selected.
+- Search news saved in favorites.
+- Search source.
 
 ## Installing
 
@@ -15,9 +26,9 @@ static let apiKey = "API"
 
 ## Built With
 
-- SwiftUI
-- CoreData
-- LottieFiles
+* SwiftUI
+* CoreData
+* LottieFiles
 
 ## Demo
 
