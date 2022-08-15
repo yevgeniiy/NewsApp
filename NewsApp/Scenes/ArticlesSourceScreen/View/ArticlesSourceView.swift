@@ -51,7 +51,7 @@ struct ArticlesSourceView: View {
                 ArticlesEmptyView()
             }
         }
-        .buttonStyle(.plain)
+        
         
     }
 }

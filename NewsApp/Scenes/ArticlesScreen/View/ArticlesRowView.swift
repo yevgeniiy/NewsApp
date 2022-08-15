@@ -28,9 +28,11 @@ struct ArticlesRowView: View {
                         .font(.headline)
                         .lineLimit(1)
                         .padding(.bottom, 1)
+                        .foregroundColor(.black)
                     Text(article.description ?? "")
                         .lineLimit(2)
                         .font(.subheadline)
+                        .foregroundColor(.black)
                 }
             }
             .frame(height: 70)
